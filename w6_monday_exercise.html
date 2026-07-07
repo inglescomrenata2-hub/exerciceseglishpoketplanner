@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 6 · Monday — Relative Clauses | English Pocket Planner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --cream:#F5F0E8;--paper:#EDE8DF;--rule:#D4CCC0;
+    --black:#1A1814;--charcoal:#2D2926;
+    --terra:#C2714F;--terra-light:#D4896A;
+    --muted:#6B6357;--white:#FDFAF5;
+    --success:#5B9E6B;--error:#C2504F;
+  }
+  body{font-family:'Inter','Helvetica Neue',sans-serif;background:var(--cream);color:var(--black);min-height:100vh}
+
+  .prog-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--rule);z-index:200}
+  .prog-fill{height:100%;background:var(--terra);transition:width .4s ease;width:0%}
+
+  header{background:var(--white);border-bottom:1px solid var(--rule);padding:0 28px;display:flex;align-items:stretch;justify-content:space-between;min-height:52px;position:sticky;top:3px;z-index:100}
+  .wordmark{display:flex;align-items:center;font-family:'Arial Black','Helvetica Neue',Helvetica,sans-serif;font-weight:900;font-size:14px;letter-spacing:2px;text-transform:uppercase;border-right:1px solid var(--rule);padding-right:20px;margin-right:20px}
+  .wordmark span{color:var(--terra)}
+  .hd-meta{display:flex;align-items:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#B5A48A}
+  .badge{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--terra);font-weight:700;border:1px solid var(--terra);padding:4px 10px;display:flex;align-items:center}
+
+  .hero{background:var(--black);padding:40px 32px 36px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-50px;right:-50px;width:220px;height:220px;border-radius:50%;border:1px solid rgba(194,113,79,.1)}
+  .eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--terra);font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+  .eyebrow::after{content:'';width:40px;height:1px;background:var(--terra);opacity:.4}
+  .hero h1{font-family:'Arial Black','Helvetica Neue',Helvetica,sans-serif;font-weight:900;font-size:34px;letter-spacing:-1.5px;color:var(--white);line-height:1.05}
+  .hero h1 em{font-family:'Georgia',serif;font-weight:400;font-style:italic;color:var(--terra);font-size:32px}
+  .hero-goal{font-size:13px;color:#B5A48A;margin-top:14px;line-height:1.6;max-width:500px}
+  .hero-goal strong{color:var(--white)}
+  .hero-tags{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+  .htag{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 10px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4)}
+  .htag.on{border-color:var(--terra);color:var(--terra)}
+
+  .wrap{max-width:700px;margin:0 auto;padding:36px 24px 80px}
+  .sec-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--terra);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+  .scale-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:32px}
+  .scale-card{background:var(--white);border:1px solid var(--rule);padding:14px 16px;text-align:center}
+  .scale-modal{font-family:'Arial Black',Helvetica,sans-serif;font-size:15px;font-weight:900;color:var(--terra);margin-bottom:4px}
+  .scale-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
+  .scale-ex{font-size:12px;color:var(--charcoal);font-style:italic;line-height:1.5}
+
+  .ex-card{background:var(--white);border:1px solid var(--rule);margin-bottom:14px;overflow:hidden}
+  .ex-head{background:var(--paper);border-bottom:1px solid var(--rule);padding:11px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .ex-num{font-family:'Arial Black',Helvetica,sans-serif;font-size:11px;font-weight:900;color:var(--terra);letter-spacing:1px;min-width:24px}
+  .ex-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--rule);padding:2px 8px;font-weight:600}
+  .ex-tag.input{border-color:#5B8DB8;color:#5B8DB8}
+  .ex-tag.mc{border-color:#5B9E6B;color:#5B9E6B}
+  .ex-tag.output{border-color:var(--terra);color:var(--terra)}
+  .ex-inst{font-size:12px;color:var(--muted);margin-left:auto;font-style:italic}
+  .ex-body{padding:22px}
+
+  .mc-q{font-size:15px;font-weight:600;color:var(--black);margin-bottom:16px;line-height:1.5}
+  .mc-opts{display:flex;flex-direction:column;gap:8px}
+  .mc-opt{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--rule);background:var(--white);cursor:pointer;font-size:14px;color:var(--charcoal);text-align:left;width:100%;transition:all .15s}
+  .mc-opt:hover{border-color:var(--terra)}
+  .mc-opt.correct{border-color:var(--success);background:#F0F8F2;color:var(--success);pointer-events:none}
+  .mc-opt.wrong{border-color:var(--error);background:#FBF0F0;color:var(--error);pointer-events:none}
+  .mc-opt.disabled{pointer-events:none;opacity:.55}
+  .opt-lt{font-family:'Arial Black',Helvetica,sans-serif;font-size:10px;font-weight:900;color:var(--terra);min-width:16px}
+  .mc-opt.correct .opt-lt{color:var(--success)}
+  .mc-opt.wrong .opt-lt{color:var(--error)}
+
+  .fitb-sent{font-size:15px;color:var(--black);line-height:2.4;margin-bottom:4px}
+  .fitb-hint{font-size:11px;color:var(--muted);margin-bottom:12px}
+  .fitb-in{border:none;border-bottom:2px solid var(--terra);background:transparent;font-size:15px;font-family:'Inter',sans-serif;color:var(--black);padding:0 6px;width:130px;outline:none;text-align:center;transition:border-color .2s}
+  .fitb-in.ok{border-color:var(--success);color:var(--success)}
+  .fitb-in.no{border-color:var(--error);color:var(--error)}
+
+  .feedback{display:none;margin-top:12px;padding:10px 14px;font-size:13px;line-height:1.6;border-left:3px solid transparent}
+  .feedback.ok{background:#F0F8F2;color:var(--success);border-color:var(--success);display:block}
+  .feedback.no{background:#FBF0F0;color:var(--error);border-color:var(--error);display:block}
+
+  .output-box{background:var(--white);border:1px solid var(--rule);margin-bottom:14px;overflow:hidden}
+  .output-body{padding:22px}
+  .output-prompt{font-size:15px;color:var(--black);line-height:1.7;margin-bottom:16px}
+  .output-prompt strong{color:var(--terra)}
+  .output-checklist{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+  .check-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--charcoal);cursor:pointer}
+  .check-box{width:18px;height:18px;border:1px solid var(--rule);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .check-box.checked{background:var(--terra);border-color:var(--terra)}
+  .check-label{line-height:1.5}
+  .output-textarea{width:100%;border:1px solid var(--rule);background:var(--cream);padding:14px 16px;font-size:14px;font-family:'Inter',sans-serif;color:var(--black);line-height:1.7;resize:vertical;min-height:140px;outline:none;transition:border-color .2s}
+  .output-textarea:focus{border-color:var(--terra)}
+  .output-counter{font-size:11px;color:var(--muted);margin-top:6px;text-align:right}
+
+  .btn-check{background:var(--black);color:var(--cream);border:none;padding:11px 26px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:14px}
+  .btn-check:hover{background:var(--charcoal)}
+  .btn-result{background:var(--black);color:var(--cream);border:none;padding:13px 32px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+  .btn-reset{background:transparent;color:var(--muted);border:1px solid var(--rule);padding:12px 22px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-left:10px}
+
+  hr.div{border:none;border-top:1px solid var(--rule);margin:36px 0}
+
+  .score-card{display:none;background:var(--white);border:1px solid var(--rule);padding:32px;text-align:center;margin-top:8px}
+  .score-card.show{display:block}
+  .score-num{font-family:'Arial Black',Helvetica,sans-serif;font-size:56px;font-weight:900;color:var(--terra);line-height:1;display:block;margin-bottom:6px}
+  .score-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:16px}
+  .score-msg{font-family:'Georgia',serif;font-style:italic;font-size:16px;color:var(--charcoal);line-height:1.6;max-width:380px;margin:0 auto}
+
+  @media(max-width:600px){
+    .hero{padding:28px 20px}.hero h1{font-size:26px}.hero h1 em{font-size:24px}
+    .wrap{padding:28px 16px 60px}header{padding:0 16px}
+    .scale-grid{grid-template-columns:1fr}
+    .score-num{font-size:44px}
+  }
+</style>
+</head>
+<body>
+
+<div class="prog-wrap"><div class="prog-fill" id="prog"></div></div>
+
+<header>
+  <div style="display:flex;align-items:center">
+    <div class="wordmark">Renata<span>em</span>Inglês</div>
+    <span class="hd-meta">English Pocket Planner</span>
+  </div>
+  <div style="display:flex;align-items:center">
+    <span class="badge">Week 6 · Monday</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Week 6 · Monday</div>
+  <h1>Relative Clauses<br><em>Describe People &amp; Things</em></h1>
+  <p class="hero-goal"><strong>Goal:</strong> Conectar duas ideias em uma frase só usando who, which, that e where — para soar mais maduro e natural em inglês.</p>
+  <div class="hero-tags">
+    <span class="htag on">who</span>
+    <span class="htag on">which · that</span>
+    <span class="htag on">where</span>
+    <span class="htag on">connect ideas</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="sec-label">Quick reference — qual pronome usar</div>
+  <div class="scale-grid">
+    <div class="scale-card" style="border-top:3px solid var(--terra)">
+      <div class="scale-modal">WHO</div>
+      <span class="scale-label">Pessoas</span>
+      <div class="scale-ex">the teacher who changed my life</div>
+    </div>
+    <div class="scale-card" style="border-top:3px solid #5B9E6B">
+      <div class="scale-modal">WHICH / THAT</div>
+      <span class="scale-label">Coisas</span>
+      <div class="scale-ex">the app that helps me practice</div>
+    </div>
+    <div class="scale-card" style="border-top:3px solid #7B68B5">
+      <div class="scale-modal">WHERE</div>
+      <span class="scale-label">Lugares</span>
+      <div class="scale-ex">the café where we first met</div>
+    </div>
+  </div>
+
+  <div class="sec-label">Input Practice</div>
+
+  <div class="ex-card">
+    <div class="ex-head">
+      <span class="ex-num">01</span>
+      <span class="ex-tag mc">Multiple Choice</span>
+      <span class="ex-inst">Escolha o pronome relativo correto.</span>
+    </div>
+    <div class="ex-body">
+      <p class="mc-q">She's the mentor ___ believed in me from the start.</p>
+      <div class="mc-opts">
+        <button class="mc-opt" onclick="checkMC(this,false,'e1')"><span class="opt-lt">A</span> which</button>
+        <button class="mc-opt" onclick="checkMC(this,true,'e1')"><span class="opt-lt">B</span> who</button>
+        <button class="mc-opt" onclick="checkMC(this,false,'e1')"><span class="opt-lt">C</span> where</button>
+      </div>
+      <div class="feedback" id="fb-e1-ok">✓ Isso! "Who" é para pessoas — a mentor. "Which" é só para coisas, e "where" para lugares.</div>
+      <div class="feedback" id="fb-e1-no">✗ Estamos falando de uma pessoa (the mentor). Qual pronome relativo é usado para pessoas?</div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-head">
+      <span class="ex-num">02</span>
+      <span class="ex-tag mc">Multiple Choice</span>
+      <span class="ex-inst">Escolha o pronome relativo correto.</span>
+    </div>
+    <div class="ex-body">
+      <p class="mc-q">This is the course ___ completely changed how I study English.</p>
+      <div class="mc-opts">
+        <button class="mc-opt" onclick="checkMC(this,false,'e2')"><span class="opt-lt">A</span> who</button>
+        <button class="mc-opt" onclick="checkMC(this,true,'e2')"><span class="opt-lt">B</span> that</button>
+        <button class="mc-opt" onclick="checkMC(this,false,'e2')"><span class="opt-lt">C</span> where</button>
+      </div>
+      <div class="feedback" id="fb-e2-ok">✓ Correto! "That" (ou "which") é para coisas — the course. Na fala do dia a dia, "that" soa mais natural.</div>
+      <div class="feedback" id="fb-e2-no">✗ "The course" é uma coisa, não uma pessoa nem um lugar. Qual pronome serve para coisas?</div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-head">
+      <span class="ex-num">03</span>
+      <span class="ex-tag input">Fill in the Blank</span>
+      <span class="ex-inst">Complete com who, which/that ou where.</span>
+    </div>
+    <div class="ex-body">
+      <p class="fitb-sent">I have a friend <input class="fitb-in" id="f1" placeholder="?"/> speaks four languages.</p>
+      <p class="fitb-hint">💡 A friend = pessoa.</p>
+      <p class="fitb-sent">That's the city <input class="fitb-in" id="f2" placeholder="?"/> I started over.</p>
+      <p class="fitb-hint">💡 The city = lugar.</p>
+      <p class="fitb-sent">It's a habit <input class="fitb-in" id="f3" placeholder="that / which"/> takes time to build.</p>
+      <p class="fitb-hint">💡 A habit = coisa (aceita duas respostas).</p>
+      <button class="btn-check" onclick="checkFITB()">Check →</button>
+      <div class="feedback" id="fb-fitb"></div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-head">
+      <span class="ex-num">04</span>
+      <span class="ex-tag mc">Multiple Choice</span>
+      <span class="ex-inst">Junte as duas frases numa só.</span>
+    </div>
+    <div class="ex-body">
+      <p class="mc-q">Junte: "I have a client. She always pays late." — Qual versão está correta e natural?</p>
+      <div class="mc-opts">
+        <button class="mc-opt" onclick="checkMC(this,true,'e4')"><span class="opt-lt">A</span> I have a client who always pays late.</button>
+        <button class="mc-opt" onclick="checkMC(this,false,'e4')"><span class="opt-lt">B</span> I have a client which always pays late.</button>
+        <button class="mc-opt" onclick="checkMC(this,false,'e4')"><span class="opt-lt">C</span> I have a client where always pays late.</button>
+      </div>
+      <div class="feedback" id="fb-e4-ok">✓ Perfeito! Em vez de duas frases curtas, você conecta com "who" (pessoa). É assim que você soa mais maduro sem usar palavras difíceis.</div>
+      <div class="feedback" id="fb-e4-no">✗ "A client" é uma pessoa. E numa defining clause (sem vírgula), a informação é essencial. Qual usa o pronome de pessoa?</div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <div class="sec-label">Output — Speaking &amp; Writing</div>
+
+  <div class="output-box">
+    <div class="ex-head">
+      <span class="ex-num">05</span>
+      <span class="ex-tag output">Output</span>
+      <span class="ex-inst">Escreva e depois fale em voz alta.</span>
+    </div>
+    <div class="output-body">
+      <p class="output-prompt">
+        Escreva 3 frases sobre a sua vida real, cada uma com um pronome relativo diferente. Descreva uma <strong>pessoa</strong> (who), uma <strong>coisa</strong> (which/that) e um <strong>lugar</strong> (where). Depois leia em voz alta.
+      </p>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">Exemplos: I have a student who never gives up. / It's a project that took me months. / This is the city where I grew up.</p>
+
+      <div class="output-checklist" id="checklist">
+        <div class="check-item" onclick="toggleCheck(0)">
+          <div class="check-box" id="cb0"><span style="color:white;font-size:11px;display:none">✓</span></div>
+          <span class="check-label"><strong style="color:var(--terra)">WHO</strong> — uma frase descrevendo uma pessoa real</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(1)">
+          <div class="check-box" id="cb1"><span style="color:white;font-size:11px;display:none">✓</span></div>
+          <span class="check-label"><strong style="color:var(--terra)">WHICH / THAT</strong> — uma frase descrevendo uma coisa ou projeto</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(2)">
+          <div class="check-box" id="cb2"><span style="color:white;font-size:11px;display:none">✓</span></div>
+          <span class="check-label"><strong style="color:var(--terra)">WHERE</strong> — uma frase descrevendo um lugar que marcou você</span>
+        </div>
+      </div>
+
+      <textarea class="output-textarea" id="outputText" placeholder="Escreva suas 3 frases aqui — uma por linha. Use pessoas, coisas e lugares reais da sua vida." oninput="updateCounter()"></textarea>
+      <div class="output-counter" id="counter">0 words</div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <div style="text-align:center">
+    <button class="btn-result" onclick="showScore()">Ver meu resultado →</button>
+    <button class="btn-reset" onclick="resetAll()">↺ Recomeçar</button>
+  </div>
+
+  <div class="score-card" id="scoreCard">
+    <span class="score-num" id="scoreNum">—</span>
+    <span class="score-lbl">de 4 exercícios corretos</span>
+    <p class="score-msg" id="scoreMsg"></p>
+  </div>
+
+</div>
+
+<script>
+const st = { e1:null, e2:null, e4:null, fitb:false };
+const checks = [false, false, false];
+
+function checkMC(btn, ok, id) {
+  if (st[id] !== null) return;
+  st[id] = ok;
+  btn.closest('.mc-opts').querySelectorAll('.mc-opt').forEach(o => o.classList.add('disabled'));
+  btn.classList.add(ok ? 'correct' : 'wrong');
+  document.getElementById('fb-' + id + '-' + (ok ? 'ok' : 'no')).classList.add(ok ? 'ok' : 'no');
+  updateProg();
+}
+
+function checkFITB() {
+  const answers = {
+    f1: ['who'],
+    f2: ['where'],
+    f3: ['that','which']
+  };
+  let allOk = true, anyFilled = false;
+  Object.keys(answers).forEach(id => {
+    const inp = document.getElementById(id);
+    if (!inp) return;
+    const val = inp.value.trim().toLowerCase();
+    if (!val) return;
+    anyFilled = true;
+    if (answers[id].includes(val)) {
+      inp.classList.remove('no'); inp.classList.add('ok');
+    } else {
+      inp.classList.remove('ok'); inp.classList.add('no');
+      allOk = false;
+    }
+  });
+  const fb = document.getElementById('fb-fitb');
+  if (!anyFilled) { fb.className = 'feedback no'; fb.textContent = '✗ Preencha pelo menos uma lacuna antes de checar.'; return; }
+  if (allOk) {
+    fb.className = 'feedback ok';
+    fb.textContent = '✓ Perfeito! Pessoa → who, lugar → where, coisa → that/which. A última aceita as duas.';
+    st.fitb = true;
+  } else {
+    fb.className = 'feedback no';
+    fb.textContent = '✗ Confira as lacunas destacadas. Pense: é pessoa (who), lugar (where) ou coisa (that/which)?';
+  }
+  updateProg();
+}
+
+function toggleCheck(i) {
+  checks[i] = !checks[i];
+  const box = document.getElementById('cb' + i);
+  const icon = box.querySelector('span');
+  if (checks[i]) { box.classList.add('checked'); icon.style.display = 'block'; }
+  else { box.classList.remove('checked'); icon.style.display = 'none'; }
+}
+
+function updateCounter() {
+  const text = document.getElementById('outputText').value.trim();
+  const words = text ? text.split(/\s+/).length : 0;
+  document.getElementById('counter').textContent = words + ' word' + (words !== 1 ? 's' : '');
+}
+
+function updateProg() {
+  const done = [st.e1, st.e2, st.e4].filter(v => v !== null).length + (st.fitb ? 1 : 0);
+  document.getElementById('prog').style.width = (done / 4 * 100) + '%';
+}
+
+function showScore() {
+  const correct = [st.e1, st.e2, st.e4].filter(v => v === true).length + (st.fitb ? 1 : 0);
+  const writingDone = checks.filter(Boolean).length;
+  document.getElementById('scoreNum').textContent = correct;
+  const msgs = [
+    "Releia o Quick Reference lá em cima: who = pessoa, which/that = coisa, where = lugar. Tente de novo.",
+    "Tá chegando lá! A dica é sempre perguntar: é pessoa, coisa ou lugar? Revise e refaça.",
+    "Bom trabalho! Revise o que errou. E a parte de output é onde vira natural — você escreveu suas 3 frases?",
+    "Excelente! Você conecta ideias como falante maduro. " + (writingDone < 3 ? "Agora complete o output com pessoas, coisas e lugares reais seus." : "E seu output está pronto. Rumo a terça!")
+  ];
+  document.getElementById('scoreMsg').textContent = msgs[Math.min(correct, 3)];
+  const card = document.getElementById('scoreCard');
+  card.classList.add('show');
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetAll() {
+  st.e1 = null; st.e2 = null; st.e4 = null; st.fitb = false;
+  for (let i = 0; i < 3; i++) {
+    checks[i] = false;
+    const box = document.getElementById('cb' + i);
+    box.classList.remove('checked');
+    box.querySelector('span').style.display = 'none';
+  }
+  document.querySelectorAll('.mc-opt').forEach(o => o.classList.remove('correct','wrong','disabled'));
+  document.querySelectorAll('.feedback').forEach(f => f.className = 'feedback');
+  document.querySelectorAll('.fitb-in').forEach(i => { i.value = ''; i.classList.remove('ok','no'); });
+  document.getElementById('outputText').value = '';
+  document.getElementById('counter').textContent = '0 words';
+  document.getElementById('scoreCard').classList.remove('show');
+  document.getElementById('prog').style.width = '0%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
